@@ -20,6 +20,12 @@ public class GrowBranch : MonoBehaviour {
 	private Vector3 growthRateUp;
 	private Vector3 growthRateOut;
 	
+	[SerializeField]
+	private float _targetScaleX = 1.0f;
+	
+	[SerializeField]
+	private float _targetScaleY = 1.0f;
+	
 	private int _connectedBranches = 0;
 	
 	public int maxBranches = 3;
@@ -29,6 +35,11 @@ public class GrowBranch : MonoBehaviour {
 //	{
 //		growthInterval += Random.Range(-growthIntervalVariance, growthIntervalVariance );
 //	}
+	
+	public int ConnectedBranches()
+	{
+		return _connectedBranches;
+	}
 	
 	void OnTriggerEnter( Collider coll )
 	{
@@ -47,6 +58,15 @@ public class GrowBranch : MonoBehaviour {
 			_connectedBranches--;
 			this.enabled = false;
 		}
+	}
+	
+	private bool CheckForRotting()
+	{
+		if ( gameObject.GetComponent<Rot>().IsRotting() )
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	public void SetNumberOfConnected( int n )
@@ -86,6 +106,7 @@ public class GrowBranch : MonoBehaviour {
 					branchClone = Instantiate( branch, branchPoint.transform.position, branchPoint.transform.rotation ) as GameObject;
 					branchClone.GetComponent<FixedJoint>().connectedBody = rigidbody;
 					branchPoint.transform.rotation = transform.rotation;
+					branchClone.transform.parent = GameObject.Find ( "Branches" ).transform;
 					GameSettings.Instance.SetBranches( 1 );
 					_connectedBranches++;
 				}
@@ -131,8 +152,10 @@ public class GrowBranch : MonoBehaviour {
 	void Start () {
 		//setGrowthInterval();
 		transform.localScale = Vector3.one*0.01f;
-		growthRateUp = new Vector3 ( outwardGrowthRate/growthInterval, 1.0f/growthInterval, outwardGrowthRate/growthInterval )*Time.deltaTime;
-		growthRateOut = new Vector3 ( outwardGrowthRate/growthInterval, 0.0f, outwardGrowthRate/growthInterval )*Time.deltaTime;	
+//		growthRateUp = new Vector3 ( outwardGrowthRate/growthInterval, 1.0f/growthInterval, outwardGrowthRate/growthInterval )*Time.deltaTime;
+//		growthRateOut = new Vector3 ( outwardGrowthRate/growthInterval, 0.0f, outwardGrowthRate/growthInterval )*Time.deltaTime;
+		growthRateUp = new Vector3 ( 0, _targetScaleY/growthInterval, 0 )*Time.deltaTime;
+		growthRateOut = new Vector3 ( _targetScaleX, 0, _targetScaleX )*Time.deltaTime*outwardGrowthRate;
 	}
 	
 	// Update is called once per frame
@@ -150,21 +173,24 @@ public class GrowBranch : MonoBehaviour {
 //		{
 //			growOut();
 //		}
-		if ( !rigidbody.useGravity )
+		if ( !rigidbody.useGravity && !CheckForRotting() )
 		{
-			checkConnectedForCut();
 //			if ( timer < growthInterval )
 //			{
 				updateTimer();
 //			}
-			if ( transform.localScale.y < 1 )
+			if ( transform.localScale.y < _targetScaleY )
 			{
 				growUp();
 			}
-			else if ( transform.localScale.x < 1 )
+			if ( transform.localScale.x < _targetScaleX )
 			{
 				growOut();
 			}
+		}
+		if ( !rigidbody.useGravity )
+		{
+			checkConnectedForCut();
 		}
 	}
 }

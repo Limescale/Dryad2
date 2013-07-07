@@ -9,6 +9,7 @@ public class MoveCollider : MonoBehaviour {
 		{
 			if ( touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled )
 			{
+				Ray touchRay = Camera.main.ScreenPointToRay( new Vector3( touch.position.x, touch.position.y, Camera.main.nearClipPlane ) );
 			}
 		}
 	}
@@ -20,6 +21,7 @@ public class MoveCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//MoveOnTouch();
 	
 	}
 }

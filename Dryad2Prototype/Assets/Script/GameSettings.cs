@@ -34,6 +34,11 @@ public class GameSettings : MonoBehaviour {
 	
 	private int _numberOfBranches = 0;
 	
+	private int _nextRotAmount = 1;
+	
+	private float _rotTimer = 0.0f;
+	private float _rotInterval = 10.0f;
+	
 //	public float GetTime()
 //	{
 //		return _timer;
@@ -62,6 +67,30 @@ public class GameSettings : MonoBehaviour {
 			return false;
 		}
 		return true;
+	}
+	
+	public int NumberOfBranches()
+	{
+		return _numberOfBranches;
+	}
+	
+	public bool IsRotAmountAboveZero()
+	{
+		if ( _nextRotAmount > 0 )
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public int AmountOfBranchesToRot()
+	{
+		return _nextRotAmount;
+	}
+	
+	public void SetRotAmount( int amount )
+	{
+		_nextRotAmount = amount;
 	}
 	
 	public int GetBranches()

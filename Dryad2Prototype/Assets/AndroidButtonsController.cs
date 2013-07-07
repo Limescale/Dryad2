@@ -1,23 +1,23 @@
 using UnityEngine;
 using System.Collections;
 
-public class lookAtTarget : MonoBehaviour {
+public class AndroidButtonsController : MonoBehaviour {
 	
-	Transform target;
-	
-	void LookAtParent()
+	private void GetInput()
 	{
-		transform.LookAt( target );
+		if ( Input.GetKey(KeyCode.Escape) )
+		{
+			Application.Quit();
+		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		target = transform.parent.transform;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		GetInput();
 	}
 }
