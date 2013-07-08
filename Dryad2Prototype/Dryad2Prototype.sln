@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{F63D97B9-4EA6-A0D4-968F-BAFF6F137350}") = "Dryad2Prototype", "Assembly-CSharp.csproj", "{96D66FEB-20A4-EFFF-F816-6E567A022FE7}"
 EndProject
+Project("{F63D97B9-4EA6-A0D4-968F-BAFF6F137350}") = "Dryad2Prototype", "Assembly-CSharp-Editor.csproj", "{C5CA0A02-EF8F-6F89-CAA4-8CC7A6273701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{96D66FEB-20A4-EFFF-F816-6E567A022FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96D66FEB-20A4-EFFF-F816-6E567A022FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96D66FEB-20A4-EFFF-F816-6E567A022FE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CA0A02-EF8F-6F89-CAA4-8CC7A6273701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CA0A02-EF8F-6F89-CAA4-8CC7A6273701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CA0A02-EF8F-6F89-CAA4-8CC7A6273701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CA0A02-EF8F-6F89-CAA4-8CC7A6273701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																											GlobalSection(MonoDevelopProperties) = preSolution
+																														GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
